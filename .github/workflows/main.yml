@@ -6,7 +6,7 @@ name: New Build Docker Image and Push to AWS ECR
 on:
   # Triggers the workflow on push or pull request events but only for the "dev" branch
   push:
-    branches: [ prod, dev ]
+    branches: [ main,dev ]
   
 
   # Allows you to run this workflow manually from the Actions tab
@@ -41,7 +41,7 @@ jobs:
       - name: App build, test, tag, and push image to Amazon ECR
         env:
          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-         ECR_REPOSITORY: docker
+         ECR_REPOSITORY: myapp
          IMAGE_TAG: v3.1
         run: | 
           ls -ltra
@@ -57,7 +57,7 @@ jobs:
       - name: MySQL DB build, test, tag, and push image to Amazon ECR
         env:
          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-         ECR_REPOSITORY: mysqldb
+         ECR_REPOSITORY: mydb
          IMAGE_TAG: v2.0
         run: |
           ls -ltra
